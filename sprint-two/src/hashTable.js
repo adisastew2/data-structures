@@ -9,10 +9,10 @@ HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
 
   // Get the current linked list head
-  var tuple = this._storage.get(index)
-  while (tuple){
+  var tuple = this._storage.get(index);
+  while (tuple) {
     // if tuple exists, update its value and exit
-    if(tuple['key'] === k) {
+    if (tuple['key'] === k) {
       tuple['value'] = v;
       return;
     }
@@ -39,11 +39,11 @@ HashTable.prototype.retrieve = function(k) {
   
   while (tuple) {
     // if tuple key matches, return value
-    if(tuple['key'] === k) {
+    if (tuple['key'] === k) {
       return tuple['value'];
     }
     // iterate through linked list
-    tuple = tuple["next"];
+    tuple = tuple['next'];
   }
 };
 
@@ -54,7 +54,7 @@ HashTable.prototype.remove = function(k) {
 
   if (tuple) {
     // tuple head is what we're removing
-    if (tuple['key'] == k) {
+    if (tuple['key'] === k) {
       // set linked list head to next tuple
       this._storage.set(index, tuple['next']);
     } else {
