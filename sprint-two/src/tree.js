@@ -30,8 +30,9 @@ treeMethods.contains = function(target) {
   return !!result;
 };
 
-
-
 /*
  * Complexity: What is the time complexity of the above functions?
+ * constructor: O(1), constant time
+ * addChild: O(1), constant time
+ * contains: O(n), linear time
  */
