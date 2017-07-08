@@ -2,12 +2,13 @@ describe('tree', function() {
   var tree;
 
   beforeEach(function() {
-    tree = Tree();
+    tree = Tree(0);
   });
 
-  it('should have methods named "addChild" and "contains", and a property named "value"', function() {
+  it('should have methods named "addChild", "traverse", "removeFromParent" and "contains", and a property named "value" and "parent"', function() {
     expect(tree.addChild).to.be.a('function');
     expect(tree.contains).to.be.a('function');
+    expect(tree.traverse).to.be.a('function');
     expect(tree.removeFromParent).to.be.a('function');
     expect(tree.hasOwnProperty('value')).to.equal(true);
     expect(tree.hasOwnProperty('parent')).to.equal(true);
@@ -55,4 +56,20 @@ describe('tree', function() {
     expect(tree.contains(6)).to.equal(false);
   });
 
+  it('should traverse a tree passing each value into a callback', function() {
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.addChild(7);
+    tree.children[2].addChild(3);
+
+    var values = [];
+    var callback = function(value) {
+      values.push(value);
+    };
+
+    tree.traverse(callback);
+
+    expect(values).to.eql([0, 5, 6, 7, 3]);
+
+  });
 });

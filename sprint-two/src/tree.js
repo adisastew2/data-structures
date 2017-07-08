@@ -36,15 +36,19 @@ treeMethods.contains = function(target) {
 };
 
 treeMethods.removeFromParent = function() {
-  
   if (this.parent) {
     // remove self from parent children
     var siblings = this.parent.children;
     siblings.splice(siblings.indexOf(this), 1);
     // set parent to null
     this.parent = null;
-  }
-  
+  }  
+};
+
+treeMethods.traverse = function(cb) {
+  cb(this.value);
+
+  this.children.forEach(child => child.traverse(cb));
 };
 
 /*
